@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 /* eslint import/no-webpack-loader-syntax: off */
 import raw from "raw.macro"
 import Prism from 'prismjs';
-const input = raw("./overview-part-1.md")
+const input = raw("./overview.md")
 
 // const input = '# This is a header\n\nAnd this is a paragraph';
 

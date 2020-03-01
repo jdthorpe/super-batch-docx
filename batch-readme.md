@@ -1,8 +1,10 @@
+---
+---
 # SuperBatch
 
-_Opinionated convenience wrappers and best practices for Azure Batch_
+## Opinionated convenience wrappers and best practices for Azure Batch
 
-## TL;DR
+### TL;DR
 
 In principal Azure Batch can often speed up your long running for loops by
 several orders of magnitude, but converting your code to run in Azure Batch
@@ -309,7 +311,7 @@ Examples are for included for the bash, cmd, and powershell:
 
 #### Powershell
 
-```powershell
+```ps1
 # parameters
 $name = "azurebatchtest"
 $location = "westus2"
@@ -333,7 +335,7 @@ az batch account create -l $location -n $name -g $name --storage-account $name
 
 #### CMD
 
-```batch
+```bat
 REM parameters
 set name=azurebatchtest
 set location=westus2
@@ -368,7 +370,7 @@ Again, examples are for included for the bash, cmd, and powershell:
 
 #### Powershell
 
-```powershell
+```ps1
 $env:BATCH_ACCOUNT_NAME = $name
 $env:BATCH_ACCOUNT_KEY =  (az batch account keys list -n $name -g $name --query primary) -replace '"',''
 $env:BATCH_ACCOUNT_ENDPOINT =  (az batch account show -n $name -g $name --query accountEndpoint) -replace '"',''
@@ -394,7 +396,7 @@ STORAGE_ACCOUNT_CONNECTION_STRING=$(sed -e 's/^"//' -e 's/"$//' <<<"$STORAGE_ACC
 
 #### CMD
 
-```batch
+```bat
 REM Query the required parameters
 set BATCH_ACCOUNT_NAME=%name%
 for /f %i in ('az batch account keys list -n %name% -g %name% --query primary') do @set BATCH_ACCOUNT_KEY=%i
@@ -415,8 +417,9 @@ following credentials:
 
 #### Powershell
 
-```powershell
+```ps1
 $AZURE_CR_NAME = "MyOwnPrivateRegistry"
+
 # only required once:
 az acr update -n $AZURE_CR_NAME --admin-enabled true
 $REGISTRY_SERVER = (az acr show -n $AZURE_CR_NAME --query loginServer) -replace '"',''
@@ -437,7 +440,7 @@ export REGISTRY_PASSWORD=$(az acr credential show -n %AZURE_CR_NAME% --query pas
 
 #### CMD
 
-```batch
+```bat
 set AZURE_CR_NAME=MyOwnPrivateRegistry
 REM Only required once:
 az acr update -n %AZURE_CR_NAME% --admin-enabled true
@@ -481,12 +484,12 @@ removed with the following command:
 
 #### Powershell and Bash
 
-```powershell
+```ps1
 az group delete -n $name
 ```
 
 #### CMD
 
-```batch
+```bat
 az group delete -n %name%
 ```
