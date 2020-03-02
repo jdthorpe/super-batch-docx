@@ -5,15 +5,18 @@ import NavList from "./nav-list";
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 import { IPageName } from "./App"
 
-export const drawerWidth = 240;
+export const drawerWidth = 220;
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        drawer: {
+        nav: {
             [theme.breakpoints.up('sm')]: {
                 width: drawerWidth,
                 flexShrink: 0,
             },
+        },
+        drawer:{
+            height:"100vh"
         },
         toolbar: theme.mixins.toolbar,
         drawerPaper: {
@@ -44,7 +47,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
     };
 
     const drawer = (
-        <div>
+        <div className={classes.drawer}>
             <div className={classes.toolbar} />
             <NavList setView={props.setView} />
         </div >
@@ -52,7 +55,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
 
     return (
 
-        <nav className={classes.drawer} aria-label="mailbox folders">
+        <nav className={classes.nav} aria-label="mailbox folders">
             {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
             <Hidden smUp implementation="css">
                 <Drawer

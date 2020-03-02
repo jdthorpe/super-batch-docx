@@ -1,5 +1,3 @@
----
----
 # SuperBatch
 
 ## Opinionated convenience wrappers and best practices for Azure Batch

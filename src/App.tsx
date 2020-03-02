@@ -13,9 +13,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import GitHubForkRibbon from "react-github-fork-ribbon"
-import APIPage from "./pages/api"
-import OverviewPage from "./pages/overview"
-// import Prism from 'prismjs';
+
+import 'prismjs';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-batch';
@@ -23,13 +22,23 @@ import 'prismjs/components/prism-powershell';
 import 'prismjs/components/prism-docker';
 import 'prismjs/themes/prism-okaidia.css';
 import AzureResources from "./pages/azure-resources"
-import DockerBuild from "./pages/docker"
-import Controller from "./pages/controller"
-import CleanUp from "./pages/cleanup"
-import Worker from "./pages/worker"
 import Drawer, { drawerWidth } from "./drawer"
 import { IconButton } from '@material-ui/core';
 import MenuIcon from "@material-ui/icons/Menu"
+
+import {
+  API,
+  CleanUp,
+  Controller,
+  Docker as DockerBuild,
+  FAQ,
+  Overview,
+  Worker
+} from "./pages"
+
+
+
+
 
 const theme = createMuiTheme({
   palette: {
@@ -48,11 +57,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex"
   },
   menuButton: {
-    color: "#000",
+    color: "#eee",
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -88,17 +94,19 @@ export type IPageName =
   | "CONTROLLER"
   | "DOCKER"
   | "OVERVIEW"
+  | "FAQ"
   | "WORKER";
 
 const Page = (props: { page: IPageName }) => {
   switch (props.page) {
-    case "API": return <APIPage />;
+    case "API": return <API />;
     case "AZURE-RESOURCES": return <AzureResources />;
     case "CONTROLLER": return <Controller />;
     case "CLEANUP": return <CleanUp />;
     case "DOCKER": return <DockerBuild />;
-    case "OVERVIEW": return <OverviewPage />;
+    case "OVERVIEW": return <Overview />;
     case "WORKER": return <Worker />;
+    case "FAQ": return <FAQ />;
     default: return (<div>Something went wrong</div>)
   }
 }
@@ -141,7 +149,9 @@ function App() {
                 onClick={handleDrawerToggle}
                 className={classes.menuButton}
               >
-                <MenuIcon />
+                <MenuIcon
+                  fontSize="large"
+                />
               </IconButton>
 
               <Typography variant="h4" noWrap className={classes.logo}>

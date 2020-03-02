@@ -1,5 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import copy from "clipboard-copy"
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -40,9 +42,23 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
 
     },
+    tabs: {
+        justifyContent: "space-between"
+    },
+    tab: {
+        minWidth: "50px"
+    },
+    icon: {
+        paddingRight: "1rem",
+        display: "flex",
+        justifyContent: "center"
+    },
     appbar: {
         borderTopLeftRadius: "0.3rem",
         borderTopRightRadius: "0.3rem",
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "space-between"
     },
     code: {
         marginTop: "-10px",
@@ -56,6 +72,13 @@ const useStyles = makeStyles(theme => ({
 
 
 const theme = createMuiTheme({
+    overrides: {
+        MuiTab: {
+            root: {
+                maxHeight: 32
+            }
+        }
+    },
     palette: {
         primary: {
             main: '#ddd',
@@ -63,8 +86,12 @@ const theme = createMuiTheme({
         secondary: {
             main: '#ff63e5',
         },
+        text: {
+            primary: "#ff63e5",
+            secondary: "#ff63e5",
+        },
 
-    contrastThreshold: 3,
+        contrastThreshold: 3,
     }
 
 });
@@ -97,13 +124,20 @@ export default function CodeTabs(props: IProps) {
 
             <ThemeProvider theme={theme}>
                 <AppBar position="static" className={classes.appbar}>
+
                     <Tabs value={props.value}
+                        style={{ width: "calc(100% - 44px)" }}
                         onChange={handleChange}
                         aria-label="simple tabs example">
-                        {props.blocks.map(([language,value], index) => (
-                            <Tab label={language} color={"secondary"} {...a11yProps(index)} />
+
+                        {props.blocks.map(([language,], index) => (
+                            <Tab label={language} color={"secondary"} {...a11yProps(index)} className={classes.tab} />
                         ))}
                     </Tabs>
+                    <div className={classes.icon}
+                        onClick={() => copy(props.blocks[props.value][1].trim().split('\n').slice(1,-1).join("\n")).then(() => alert('success'))}>
+                        <FileCopyIcon fontSize="small" />
+                    </div>
                 </AppBar>
             </ThemeProvider>
             {props.blocks.map(([, code], index) => (

@@ -10,7 +10,7 @@ pip install git+https://github.com/jdthorpe/batch-config
 
 Finally, while the following is one of the longer scripts you'll need to
 write, it can be written by adding the boiler plate code to you're original
-code containing the for loop containing the tasks that are to be deligated
+code containing the for loop containing the tasks that are to be delegated
 to Azure Batch.
 
 You'll most likely just need to update it with your batch configuration
@@ -91,5 +91,3 @@ for i in range(len(SEEDS)):
     out[i] = joblib.load(fpath)
 print(sum(out))
 ```
-
-

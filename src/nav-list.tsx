@@ -1,14 +1,9 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import CodeIcon from '@material-ui/icons/Code';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import clsx from "clsx"
 import { IPageName } from "./App"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,6 +12,32 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '100%',
             maxWidth: 360,
             backgroundColor: theme.palette.background.paper,
+        },
+        drawer: {
+            backgroundColor:"#49494d",
+            color:"#e6e6eb",
+            paddingLeft:".8rem",
+            paddingTop:".8rem",
+            height:"100%"
+        },
+        item: {
+            fontSize: 13,
+            padding: theme.spacing(0.5, 0, 0.5, 1),
+            borderLeft: '4px solid transparent',
+            boxSizing: 'content-box',
+            '&:hover': {
+                borderLeft: `4px solid ${
+                    theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
+                    }`,
+            },
+        },
+        itemSecondary: {
+            paddingLeft: "1.6rem"
+        },
+        ul: {
+            padding: 0,
+            margin: 0,
+            listStyle: 'none',
         },
         nested: {
             paddingLeft: theme.spacing(4),
@@ -43,40 +64,36 @@ export default function NestedList(props: {
     };
 
     return (
-        <List
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                    Nested List Items
-        </ListSubheader>
-            }
-            className={classes.root}
-        >
-            <ListItem button onClick={() => props.setView("OVERVIEW")}>
-                <ListItemText primary="Overview" />
-            </ListItem>
-            <ListItem button onClick={handleClick}>
-                <ListItemIcon>
-                    <CodeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Tutorial" />
-                {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                    {CODE_PAGES.map(([name, key]) => (
+        <div className={classes.drawer}>
+            <Typography
+                component="ul"
+                aria-labelledby="nested-list-subheader"
+                className={classes.ul}
+            >
+                <li className={classes.item} onClick={() => props.setView("OVERVIEW")}>
+                    <ListItemText primary="Overview" />
+                </li>
+                <li className={classes.item} onClick={handleClick}>
+                    <ListItemText primary="Tutorial" />
+                </li>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <ul className={classes.ul}>
+                        {CODE_PAGES.map(([name, key]) => (
 
-                        <ListItem button className={classes.nested} key={key} onClick={() => props.setView(key)}>
-                            <ListItemText primary={name} />
-                        </ListItem>
+                            <li className={clsx(classes.item, classes.itemSecondary)} key={key} onClick={() => props.setView(key)}>
+                                {name}
+                            </li>
 
-                    ))}
-                </List>
-            </Collapse>
-            <ListItem button onClick={() => props.setView("API")}>
-                <ListItemText primary="API" />
-            </ListItem>
-        </List>
+                        ))}
+                    </ul>
+                </Collapse>
+                <li className={classes.item} onClick={() => props.setView("FAQ")}>
+                    <ListItemText primary="FAQ" />
+                </li>
+                <li className={classes.item} onClick={() => props.setView("API")}>
+                    <ListItemText primary="API" />
+                </li>
+            </Typography>
+        </div>
     );
 }
