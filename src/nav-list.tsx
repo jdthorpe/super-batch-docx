@@ -46,12 +46,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const CODE_PAGES: [string, IPageName][] = [
-    ["Worker Code", "WORKER",],
     ["Create Azure Resources", "AZURE-RESOURCES",],
-    ["Build Docker Image", "DOCKER",],
-    ["Run the Job", "CONTROLLER"],
+    ["Refactoring your Code", "CODE-SPLITTING",],
+    ["The Task Worker", "WORKER",],
+    ["Build the Docker Image", "DOCKER",],
+    ["The Controller", "CONTROLLER"],
     ["Clean Up", "CLEANUP"],
 ]
+
 
 export default function NestedList(props: {
     setView: (x: IPageName) => void
@@ -70,7 +72,7 @@ export default function NestedList(props: {
                 aria-labelledby="nested-list-subheader"
                 className={classes.ul}
             >
-                <li className={classes.item} onClick={() => props.setView("OVERVIEW")}>
+                <li className={`active ${classes.item}`} onClick={() => props.setView("OVERVIEW")}>
                     <ListItemText primary="Overview" />
                 </li>
                 <li className={classes.item} onClick={handleClick}>

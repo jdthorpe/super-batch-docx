@@ -1,22 +1,18 @@
 # Bundle your worker code
 
 In this step you will bundle your worker code and it's dependencies so that
-it can be executed by Azure Batch.  Start by creating a docker file like the following:
+it can be executed by Azure Batch. The easiest way to replicate your current
+python environment is to export your current configuration into a
+`requirements.txt` file via:
 
-```dockerfile
-# ./Dockerfile
-FROM python:3.7
+_*make sure you `pip install joblib` before calling this, as we'll use it when
+writing the `worker.py`_
 
-# Install dependencies
-RUN pip install --upgrade pip \
-    && pip install numpy joblib
-
-# Copy in your worker code
-COPY worker.py constants.py .
+```shell
+pip freeze >> requirements.txt
 ```
 
-**Best practice tip** To clone your current python environment in the docker container, call *`pip freeze >> requirements.txt` in your local environment
-and use the following Dockerfile:
+Next create a docker file in the root of your project with the following:
 
 ```dockerfile
 # ./Dockerfile
@@ -28,37 +24,31 @@ RUN pip install --upgrade pip \
     && pip install -r requirements.txt
 
 # Copy the worker and constants
-COPY worker.py constants.py .
+COPY task.py worker.py constants.py .
 ```
 
-## Build and publish the docker image
+Next log into the registry
 
-To create a docker image locally, navigate to the project directory and call:
-
-```bash
-docker build -t myusername/sum-of-powers:v1 .
+```powershell
+# *Note that the acr login token is typically only valid for one hour*
+$AZURE_CR_NAME = "myownprivateregistry"
+az acr login --name $AZURE_CR_NAME
 ```
 
-Next, upload the docker image to a registry that is accessible to Azure
-Batch.  If you own that user name (`myusername`) at [Docker
-Hub](https://hub.docker.com) and are logged in, you can push your code to a
-**publicly available** registry like so:
+And push your code to the registry
 
-```bash
-docker push myusername/sum-of-powers:v1
-```
+```powershell
+# define the image name
+$env:REGISTRY_SERVER = (az acr show -n $AZURE_CR_NAME --query loginServer) -replace '"',''
+$IMAGE_NAME = "${env:REGISTRY_SERVER}/batch-worker:v1"
 
-However, if you wish to keep your code private and you created an Azure
-Container Registry in the `Create Azure Resources` step, then login to the
-azure container registry and push your code to the ACR with the following code:
-
-```bash
-# log in to Azure and the container registry
-az acr login --name myownprivateregistry
-
-# tag the local image
-docker tag sum-of-powers:v1 myownprivateregistry.azurecr.io/sum-of-powers:v1
+# build the image locally
+docker build . -t $IMAGE_NAME
 
 # push the image to the private registry
-docker push myownprivateregistry.azurecr.io/sum-of-powers:v1
+docker push $IMAGE_NAME
 ```
+
+**Tip:** always include the version (`:v1`) when tagging your docker file.
+This is important when fixing bugs, as Batch Nodes (VMs) will only pull down
+a new copy of your code when the image name or version has changed

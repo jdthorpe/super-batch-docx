@@ -1,40 +1,23 @@
-# Code
+# The Task Worker
 
-which tells Azure Batch
-about the individual tasks that need to be completed, and the worker which
-executes an individual task.
-
-In this example, we'll start that   contains a nested for loop with work which
-can be spread across multiple workers and orchestrated by Azure Batch:
-
-```python
-import numpy as np
-
-POWER = 3
-SIZE = (10,)
-SEEDS = (1, 12, 123, 1234)
-
-out = np.zeros((len(SEEDS),))
-for i, seed in enumerate(SEEDS):
-    np.random.seed(seed)
-    tmp = np.random.uniform(size=SIZE)
-    out[i] = sum(np.power(tmp, POWER))
-
-print(sum(out))
-```
+The job of the task worker is to execute a single task in a computing
+environment prepared by Azure Batch. Specifically, Azure Batch is responsible
+for (1) preparing any code dependencies (2) loading data (*resources files*)
+into the working directory (3) executing your code, and (4) retrieving the outputs.
 
 ## File Naming
 
-For convenience, we'll createa special module with the constants (file
-names) that for the shared  between the controller and the worker:
+For convenience, we'll create a special module containing the names of the
+resource and output files which is shared between the controller and
+worker modules.
 
 ```python
 # ./constants.py
 GLOBAL_CONFIG_FILE = "config.pickle"
-TASK_INPUTS_FILE = "inputs.pickle"
-TASK_OUTPUTS_FILE = "outputs.pickle"
-LOCAL_INPUTS_PATTERN = "task_{}_inputs.pickle"
-LOCAL_OUTPUTS_PATTERN = "task_{}_outputs.pickle"
+TASK_RESOURCE_FILE = "resource.pickle"
+TASK_OUTPUT_FILE = "output.pickle"
+LOCAL_RESOURCE_PATTERN = "task_{}_resource.pickle"
+LOCAL_OUTPUT_PATTERN = "task_{}_output.pickle"
 ```
 
 *Aside: In this example we'll be passing python pickle files between the
@@ -48,25 +31,35 @@ csv, yaml, json, or feather (to name a few).*
 
 ## Worker code
 
-First, we'll bundle our worker into a python script which is responsible
-for running a single task.  Specifically, it reads in the global and
-iteration specific configuration, does the work, and writes the results to
-file in the local computing environment.
+With the task code and file names separated out into their own modules, the
+worker - which is responsible for reading in the resource files, executing
+the task, and writing the output to disk - is entirely boilerplate code:
 
 ```python
 # ./worker.py
-import numpy as np
 import joblib
 from constants import GLOBAL_CONFIG_FILE, TASK_INPUTS_FILE, TASK_OUTPUTS_FILE
+from task import task
 
 # Read the designated global config and iteration parameter files
 global_config = joblib.load(GLOBAL_CONFIG_FILE)
 parameters = joblib.load(TASK_INPUTS_FILE)
 
 # Do the actual work
-np.random.seed(parameters["seed"])
-out = sum( np.power(np.random.uniform(size=global_config["size"]), global_config["power"]))
+result = task(global_config, parameters)
 
 # Write the results to the designated output file
-joblib.dump(out, TASK_OUTPUTS_FILE)
+joblib.dump(result, TASK_OUTPUTS_FILE)
+
 ```
+
+**A note about imports:** Because the worker (`worker.py`) and the task
+(`task.py`) modules are loaded into the root of the docker container, which
+is also (conveniently) the working directory when python is executed,
+`task.py` can (and should) be imported with out a leading '.' as it will also
+be on the Python path at runtime
+
+## Next up
+
+We'll bundle the worker and it's dependencies into a docker file and publish
+it in a private Azure Container Registry

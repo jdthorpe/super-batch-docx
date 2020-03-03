@@ -30,6 +30,7 @@ import {
   API,
   CleanUp,
   Controller,
+  Refactoring,
   Docker as DockerBuild,
   FAQ,
   Overview,
@@ -87,6 +88,7 @@ const useStyles = makeStyles(theme => ({
 export type IPageName =
   | "API"
   | "AZURE-RESOURCES"
+  | "CODE-SPLITTING"
   | "CLEANUP"
   | "CONTROLLER"
   | "DOCKER"
@@ -98,8 +100,9 @@ const Page = (props: { page: IPageName }) => {
   switch (props.page) {
     case "API": return <API />;
     case "AZURE-RESOURCES": return <AzureResources />;
-    case "CONTROLLER": return <Controller />;
     case "CLEANUP": return <CleanUp />;
+    case "CONTROLLER": return <Controller />;
+    case "CODE-SPLITTING": return <Refactoring />;
     case "DOCKER": return <DockerBuild />;
     case "OVERVIEW": return <Overview />;
     case "WORKER": return <Worker />;
