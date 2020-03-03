@@ -37,9 +37,6 @@ import {
 } from "./pages"
 
 
-
-
-
 const theme = createMuiTheme({
   palette: {
     primary: {

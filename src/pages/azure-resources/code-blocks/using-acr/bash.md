@@ -2,7 +2,7 @@
 export AZURE_CR_NAME="MyOwnPrivateRegistry"
 
 # Create the resource group and enable querying the password from the CLI
-az acr create -n %AZURE_CR_NAME% -r %name% --sku Basic
+az acr create -n %AZURE_CR_NAME% -g %name% -l %location% --sku Basic
 az acr update -n %AZURE_CR_NAME% --admin-enabled true
 
 # Export required parameters
