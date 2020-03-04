@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/super-batch/static/css/main.ef317bf7.chunk.css",
-    "main.js": "/super-batch/static/js/main.3853b2de.chunk.js",
-    "main.js.map": "/super-batch/static/js/main.3853b2de.chunk.js.map",
-    "runtime-main.js": "/super-batch/static/js/runtime-main.40ade205.js",
-    "runtime-main.js.map": "/super-batch/static/js/runtime-main.40ade205.js.map",
-    "static/css/2.66a375a2.chunk.css": "/super-batch/static/css/2.66a375a2.chunk.css",
-    "static/js/2.2fa4f0e5.chunk.js": "/super-batch/static/js/2.2fa4f0e5.chunk.js",
-    "static/js/2.2fa4f0e5.chunk.js.map": "/super-batch/static/js/2.2fa4f0e5.chunk.js.map",
-    "index.html": "/super-batch/index.html",
-    "precache-manifest.a8d9a04fb0415e730555b6782f38a4b1.js": "/super-batch/precache-manifest.a8d9a04fb0415e730555b6782f38a4b1.js",
-    "service-worker.js": "/super-batch/service-worker.js",
-    "static/css/2.66a375a2.chunk.css.map": "/super-batch/static/css/2.66a375a2.chunk.css.map",
-    "static/css/main.ef317bf7.chunk.css.map": "/super-batch/static/css/main.ef317bf7.chunk.css.map",
-    "static/js/2.2fa4f0e5.chunk.js.LICENSE.txt": "/super-batch/static/js/2.2fa4f0e5.chunk.js.LICENSE.txt"
+    "main.css": "/super-batch-docs/static/css/main.ef317bf7.chunk.css",
+    "main.js": "/super-batch-docs/static/js/main.f33f4235.chunk.js",
+    "main.js.map": "/super-batch-docs/static/js/main.f33f4235.chunk.js.map",
+    "runtime-main.js": "/super-batch-docs/static/js/runtime-main.47ec9086.js",
+    "runtime-main.js.map": "/super-batch-docs/static/js/runtime-main.47ec9086.js.map",
+    "static/css/2.66a375a2.chunk.css": "/super-batch-docs/static/css/2.66a375a2.chunk.css",
+    "static/js/2.2fa4f0e5.chunk.js": "/super-batch-docs/static/js/2.2fa4f0e5.chunk.js",
+    "static/js/2.2fa4f0e5.chunk.js.map": "/super-batch-docs/static/js/2.2fa4f0e5.chunk.js.map",
+    "index.html": "/super-batch-docs/index.html",
+    "precache-manifest.5da3cf522cbecb4dddf7036bef734e5d.js": "/super-batch-docs/precache-manifest.5da3cf522cbecb4dddf7036bef734e5d.js",
+    "service-worker.js": "/super-batch-docs/service-worker.js",
+    "static/css/2.66a375a2.chunk.css.map": "/super-batch-docs/static/css/2.66a375a2.chunk.css.map",
+    "static/css/main.ef317bf7.chunk.css.map": "/super-batch-docs/static/css/main.ef317bf7.chunk.css.map",
+    "static/js/2.2fa4f0e5.chunk.js.LICENSE.txt": "/super-batch-docs/static/js/2.2fa4f0e5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.40ade205.js",
+    "static/js/runtime-main.47ec9086.js",
     "static/css/2.66a375a2.chunk.css",
     "static/js/2.2fa4f0e5.chunk.js",
     "static/css/main.ef317bf7.chunk.css",
-    "static/js/main.3853b2de.chunk.js"
+    "static/js/main.f33f4235.chunk.js"
   ]
 }
