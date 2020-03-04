@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/super-batch-docs/static/css/main.ef317bf7.chunk.css",
-    "main.js": "/super-batch-docs/static/js/main.f33f4235.chunk.js",
-    "main.js.map": "/super-batch-docs/static/js/main.f33f4235.chunk.js.map",
+    "main.js": "/super-batch-docs/static/js/main.1a5a0dea.chunk.js",
+    "main.js.map": "/super-batch-docs/static/js/main.1a5a0dea.chunk.js.map",
     "runtime-main.js": "/super-batch-docs/static/js/runtime-main.47ec9086.js",
     "runtime-main.js.map": "/super-batch-docs/static/js/runtime-main.47ec9086.js.map",
     "static/css/2.66a375a2.chunk.css": "/super-batch-docs/static/css/2.66a375a2.chunk.css",
     "static/js/2.2fa4f0e5.chunk.js": "/super-batch-docs/static/js/2.2fa4f0e5.chunk.js",
     "static/js/2.2fa4f0e5.chunk.js.map": "/super-batch-docs/static/js/2.2fa4f0e5.chunk.js.map",
     "index.html": "/super-batch-docs/index.html",
-    "precache-manifest.5da3cf522cbecb4dddf7036bef734e5d.js": "/super-batch-docs/precache-manifest.5da3cf522cbecb4dddf7036bef734e5d.js",
+    "precache-manifest.023d25b5443a204fe6dbdae731c91af1.js": "/super-batch-docs/precache-manifest.023d25b5443a204fe6dbdae731c91af1.js",
     "service-worker.js": "/super-batch-docs/service-worker.js",
     "static/css/2.66a375a2.chunk.css.map": "/super-batch-docs/static/css/2.66a375a2.chunk.css.map",
     "static/css/main.ef317bf7.chunk.css.map": "/super-batch-docs/static/css/main.ef317bf7.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.66a375a2.chunk.css",
     "static/js/2.2fa4f0e5.chunk.js",
     "static/css/main.ef317bf7.chunk.css",
-    "static/js/main.f33f4235.chunk.js"
+    "static/js/main.1a5a0dea.chunk.js"
   ]
 }
