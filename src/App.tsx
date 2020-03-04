@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 101,
+    zIndex: theme.zIndex.drawer + 1,
   },
   toolbar: theme.mixins.toolbar,
   toolbarOption: {
@@ -117,6 +117,7 @@ function App() {
       <div className={classes.root}>
 
 
+        <Drawer open={mobileOpen} toggleOpen={handleDrawerToggle} />
 
         <CssBaseline />
 
@@ -147,17 +148,15 @@ function App() {
                   />
                 </IconButton>
               </Hidden>
-
               <Typography variant="h4" noWrap className={classes.logo}>
                 SuperBatch
               </Typography>
             </Toolbar>
           </AppBar>
 
-          <Drawer open={mobileOpen} toggleOpen={handleDrawerToggle} />
-          <div className={classes.toolbar} />
 
           <div className={classes.main}>
+            <div className={classes.toolbar} />
 
             <Switch>
               <Route exact={true} path="/api"> <API /></Route>
