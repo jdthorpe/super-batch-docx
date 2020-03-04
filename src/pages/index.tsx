@@ -3,6 +3,7 @@ import Prism from 'prismjs';
 import raw from "raw.macro"
 import ReactMarkdown, {ReactMarkdownProps}  from 'react-markdown'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import toc from "remark-toc"
 
 export const API = build(raw("./md/api.md"));
 export const CleanUp = build(raw("./md/cleanup.md"));
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const StyledMarkdown: React.FC<ReactMarkdownProps> = (props) => {
     const classes = useStyles()
     return (<div className={classes.root}>
-        <ReactMarkdown {...props} />
+        <ReactMarkdown {...props} plugins={[toc]}/>
     </div>)
 
 }

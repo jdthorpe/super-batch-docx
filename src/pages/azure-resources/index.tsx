@@ -30,7 +30,7 @@ required Azure resources (e.g. azure batch, storage, and optionally the azure
 container registry) need to be acquired. The strategy employed in this demo
 is to log in to the Azure CLI (\`az login\`) and export the necessary
 credentials as environment variables. This allows writing credential free
-code and letting the Azure CLI handle the Autentication and Authorization.
+code and letting the Azure CLI handle the Authentication and Authorization.
 
 After exporting these credentials, the code in \`controller.py\` is executed
 in the same terminal session, and \`super_batch\` can use them to access the

@@ -92,7 +92,7 @@ export default function NestedList() {
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <ul className={classes.ul}>
                         {CODE_PAGES.map(([name, key]) => (
-                            <Link to={key}>
+                            <Link to={key} key={key}>
                                 <li className={clsx(classes.item, classes.itemSecondary)} key={key} >
                                     {name}
                                 </li>

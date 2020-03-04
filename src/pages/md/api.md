@@ -1,62 +1,11 @@
-# Table of Contents
+# API
 
-- [Table of Contents](#table-of-contents)
-- [Module `super_batch`](#module-superbatch)
-- [Module `super_batch.client`](#module-superbatchclient)
-  - [`Client` Objects](#client-objects)
-    - [`Client.data()`](#clientdata)
-    - [`Client.from_data()`](#clientfromdata)
-    - [`Client.__init__()`](#clientinit)
-    - [`Client.build_resource_file()`](#clientbuildresourcefile)
-    - [`Client.build_output_file()`](#clientbuildoutputfile)
-    - [`Client.add_task()`](#clientaddtask)
-    - [`Client.run()`](#clientrun)
-    - [`Client.load_results()`](#clientloadresults)
-    - [`Client.print_task_output()`](#clientprinttaskoutput)
-- [Module `super_batch.BatchConfig`](#module-superbatchbatchconfig)
-  - [`BatchConfig()`](#batchconfig)
-  - [`super_batch.BatchConfig.SERVICE_KEYS`](#superbatchbatchconfigservicekeys)
-
-<a name="super_batch"></a>
-# Module `super_batch`
-
-<a name="super_batch.client"></a>
-# Module `super_batch.client`
-
-usage requires these additional modules
-
-<a name="super_batch.client.Client"></a>
 ## `Client` Objects
-
-```python
-class Client()
-```
 
 SuperBatch Client
 
 Provides an interface for preparing, running, and pulling down data from an Azure Batch job
 
-<a name="super_batch.client.Client.data"></a>
-### `Client.data()`
-
-```python
-@property
-def data(self)
-```
-
-Generate data for persisting the configuration
-
-<a name="super_batch.client.Client.from_data"></a>
-### `Client.from_data()`
-
-```python
-@staticmethod
-def from_data(data)
-```
-
-Restore configuration from data
-
-<a name="super_batch.client.Client.__init__"></a>
 ### `Client.__init__()`
 
 ```python
@@ -69,15 +18,31 @@ def __init__(self, image=None, **kwargs)
   defaults to
   ```python
   azure.batch.models.ImageReference(
-  publisher="microsoft-azure-batch",
-  offer="ubuntu-server-container",
-  sku="16-04-lts",
-  version="latest",
+      publisher="microsoft-azure-batch",
+      offer="ubuntu-server-container",
+      sku="16-04-lts",
+      version="latest",
   )
   ```
 - `**kwargs` - Additinal arguments passed to :class:`super_barch.BatchConfig`
 
-<a name="super_batch.client.Client.build_resource_file"></a>
+### `Client.data()`
+
+```python
+@property
+def data(self)
+```
+
+Generate data for persisting the configuration
+
+### `Client.from_data()`
+
+```python
+@staticmethod
+def from_data(data)
+```
+
+Restore configuration from data
 ### `Client.build_resource_file()`
 
 ```python
@@ -95,7 +60,6 @@ Uploads a local file to an Azure Blob storage container.
 
   A ResourceFile initialized with a SAS URL appropriate for Batch tasks.
 
-<a name="super_batch.client.Client.build_output_file"></a>
 ### `Client.build_output_file()`
 
 ```python
@@ -114,7 +78,6 @@ Uploads a local file to an Azure Blob storage container.
 
   A ResourceFile initialized with a SAS URL appropriate for Batch tasks.
 
-<a name="super_batch.client.Client.add_task"></a>
 ### `Client.add_task()`
 
 ```python
@@ -131,7 +94,6 @@ Adds a task for each input file in the collection to the specified job.
   if missing, defaults to the command_line parameter provided when
   instantiating this object
 
-<a name="super_batch.client.Client.run"></a>
 ### `Client.run()`
 
 ```python
@@ -147,27 +109,21 @@ all the tasks to the job.
 
 - `BatchErrorException` - If raised by the Azure Batch Python SDK
 
-<a name="super_batch.client.Client.load_results"></a>
 ### `Client.load_results()`
 
 ```python
 def load_results(self, quiet=False) -> None
 ```
 
-<a name="super_batch.client.Client.print_task_output"></a>
 ### `Client.print_task_output()`
 
 ```python
 def print_task_output(self, encoding=None)
 ```
 
-Utilty method: Prints the stdout.txt file for each task in the job.
+Utility method: Prints the stdout.txt file for each task in the job.
 
-<a name="super_batch.BatchConfig"></a>
-# Module `super_batch.BatchConfig`
-
-<a name="super_batch.BatchConfig.BatchConfig"></a>
-## `BatchConfig()`
+# `super_batch.BatchConfig`
 
 ```python
 def BatchConfig(**kwargs)
@@ -183,12 +139,12 @@ Provides an interface for preparing, running, and pulling down data from an Azur
 - `BATCH_ACCOUNT_ENDPOINT` _string_ - Batch account endpoint. Taken from the environment when not provided
 - `JOB_ID` _string_ - Name for the Batch Job
 - `STORAGE_ACCOUNT_NAME` _string_ - Storage Account name
-- `STORAGE_ACCOUNT_KEY` _string_ - Stoarge account key. Taken from the environment when not provided
+- `STORAGE_ACCOUNT_KEY` _string_ - Storage account key. Taken from the environment when not provided
 - `STORAGE_ACCOUNT_CONNECTION_STRING` _string_ - Storage account access connection string. Taken from the environment when not provided
 - `STORAGE_ACCESS_DURATION_HRS` _int_ - Time in hours that the generated the storage access token will be valid for
 - `BLOB_CONTAINER_NAME` _string_ - Name for the blob storage container
 - `POOL_ID` _string_ - Pool Id
-- `POOL_NODE_COUNT` _int_ - Count for normal priority nodes in the batch pool. Only used when createing a pool.  **Ignored if the pool already exists**
+- `POOL_NODE_COUNT` _int_ - Count for normal priority nodes in the batch pool. Only used when creating a pool.  **Ignored if the pool already exists**
 - `POOL_LOW_PRIORITY_NODE_COUNT` _int_ - Count for low priority nodes in the batch pool.    **Ignored if the pool already exists**
 - `POOL_VM_SIZE` _string_ - VM name (See the FAQ for details)
 - `DOCKER_IMAGE` _string_ - name of the docker image
@@ -198,7 +154,3 @@ Provides an interface for preparing, running, and pulling down data from an Azur
 - `DELETE_POOL_WHEN_DONE` _boolean_ - Should the batch pool be deleted when the job has been completed? Default `False`
 - `DELETE_JOB_WHEN_DONE` _boolean_ - Should the batch job be deleted when the job has been completed? Default `False`
 - `DELETE_CONTAINER_WHEN_DONE` _boolean_ - should the blob storage container be deleted when the job has been completed? Default `False`
-
-<a name="super_batch.BatchConfig.SERVICE_KEYS"></a>
-## `super_batch.BatchConfig.SERVICE_KEYS`
-

@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer + 101,
   },
   toolbar: theme.mixins.toolbar,
   toolbarOption: {
@@ -116,25 +116,25 @@ function App() {
     <Router>
       <div className={classes.root}>
 
-        <Drawer />
 
-        <div className="App">
-          
-          <CssBaseline />
 
-          <ThemeProvider theme={theme}>
+        <CssBaseline />
 
-            <AppBar position="fixed" className={classes.appBar}>
+        <ThemeProvider theme={theme}>
 
-              <Hidden xsDown implementation="css">
-                <GitHubForkRibbon href="//github.com/microsoft/simplify-docx"
-                  target="_blank"
-                  position="right"
-                  color="black">
-                  Fork me on GitHub
+          <AppBar position="fixed" className={classes.appBar}>
+
+            <Hidden xsDown implementation="css">
+              <GitHubForkRibbon href="//github.com/microsoft/simplify-docx"
+                target="_blank"
+                position="right"
+                color="black">
+                Fork me on GitHub
               </GitHubForkRibbon>
-              </Hidden>
-              <Toolbar>
+            </Hidden>
+            <Toolbar>
+
+              <Hidden smUp implementation="css">
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
@@ -146,33 +146,34 @@ function App() {
                     fontSize="large"
                   />
                 </IconButton>
+              </Hidden>
 
-                <Typography variant="h4" noWrap className={classes.logo}>
-                  SuperBatch
+              <Typography variant="h4" noWrap className={classes.logo}>
+                SuperBatch
               </Typography>
-              </Toolbar>
-            </AppBar>
+            </Toolbar>
+          </AppBar>
 
-            <div className={classes.toolbar} />
+          <Drawer open={mobileOpen} toggleOpen={handleDrawerToggle} />
+          <div className={classes.toolbar} />
 
-            <div className={classes.main}>
+          <div className={classes.main}>
 
-              <Switch>
-                <Route exact={true} path="/api"> <API /></Route>
-                <Route exact={true} path="/create-resources"> <AzureResources /></Route>
-                <Route exact={true} path="/cleanup"> <CleanUp /></Route>
-                <Route exact={true} path="/controller"> <Controller /></Route>
-                <Route exact={true} path="/refactoring"> <Refactoring /></Route>
-                <Route exact={true} path="/building-with-docker"> <DockerBuild /></Route>
-                <Route exact={true} path="/"> <Overview /></Route>
-                <Route exact={true} path="/worker"> <Worker /></Route>
-                <Route exact={true} path="/faq"> <FAQ /></Route>
-              </Switch>
-            </div>
+            <Switch>
+              <Route exact={true} path="/api"> <API /></Route>
+              <Route exact={true} path="/create-resources"> <AzureResources /></Route>
+              <Route exact={true} path="/cleanup"> <CleanUp /></Route>
+              <Route exact={true} path="/controller"> <Controller /></Route>
+              <Route exact={true} path="/refactoring"> <Refactoring /></Route>
+              <Route exact={true} path="/building-with-docker"> <DockerBuild /></Route>
+              <Route exact={true} path="/"> <Overview /></Route>
+              <Route exact={true} path="/worker"> <Worker /></Route>
+              <Route exact={true} path="/faq"> <FAQ /></Route>
+            </Switch>
+          </div>
 
-          </ThemeProvider >
+        </ThemeProvider >
 
-        </div>
       </div>
     </Router>
   );

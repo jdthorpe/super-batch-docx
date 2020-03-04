@@ -1,7 +1,8 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import copy from "clipboard-copy"
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -114,11 +115,20 @@ interface IProps {
 
 export default function CodeTabs(props: IProps) {
     const classes = useStyles();
+    const [justCopied, setJustCopied] = useState<boolean>(false);
 
     const handleChange = (event: any/*Material UI ChagneEvent*/, newValue: number) => {
         props.setValue(newValue);
     };
 
+    const handleCopy = () => {
+        const block: string = props.blocks[props.value][1].trim().split('\n').slice(1, -1).join("\n");
+
+        copy(block).then(() => {
+            setJustCopied(true);
+            setTimeout(() => setJustCopied(false), 4000);
+        })
+    }
     return (
         <Box p={2} className={classes.root}>
 
@@ -131,17 +141,20 @@ export default function CodeTabs(props: IProps) {
                         aria-label="simple tabs example">
 
                         {props.blocks.map(([language,], index) => (
-                            <Tab label={language} color={"secondary"} {...a11yProps(index)} className={classes.tab} />
+                            <Tab label={language} color={"secondary"} {...a11yProps(index)} className={classes.tab} key={index}/>
                         ))}
                     </Tabs>
                     <div className={classes.icon}
-                        onClick={() => copy(props.blocks[props.value][1].trim().split('\n').slice(1,-1).join("\n")).then(() => alert('success'))}>
-                        <FileCopyIcon fontSize="small" />
+                        onClick={handleCopy} >
+                        {justCopied ?
+                            <CheckCircleOutlineIcon fontSize="small" />
+                            : <FileCopyIcon fontSize="small" />}
+
                     </div>
                 </AppBar>
             </ThemeProvider>
             {props.blocks.map(([, code], index) => (
-                <TabPanel value={props.value} index={index}>
+                <TabPanel value={props.value} index={index} key={index}>
                     <CodeBlock code={code} />
                 </TabPanel>
             ))}
