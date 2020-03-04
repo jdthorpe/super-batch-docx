@@ -13,9 +13,16 @@ worker modules.
 
 ```python
 # ./constants.py
+# The global parameters file
 GLOBAL_CONFIG_FILE = "config.pickle"
+
+# names of the input (resource) and output files as they will
+# appear in the task environment:
 TASK_RESOURCE_FILE = "resource.pickle"
 TASK_OUTPUT_FILE = "output.pickle"
+
+# names of the input (resource) and output files as they will
+# appear on our local machine and in blob storage:
 LOCAL_RESOURCE_PATTERN = "task_{}_resource.pickle"
 LOCAL_OUTPUT_PATTERN = "task_{}_output.pickle"
 ```

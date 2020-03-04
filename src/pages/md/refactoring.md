@@ -21,8 +21,8 @@ print(sum(out))
 
 In order to work with Azure Batch however, this code needs to be split up
 into the parts that do the work and the parts that coordinate the work, and
-the various parameters may be split into global which apply to every task and
-task specific parameters.
+the various parameters may be split into global parameters which apply to
+every task and task specific parameters.
 
 ## Step 1: Refactoring in place
 

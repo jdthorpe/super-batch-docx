@@ -11,10 +11,10 @@ best practices too.
 
 ## Azure Batch
 
-Anytime you have code that can be divided into independent chunks, those
-chunks can be scheduled by Azure Batch and executed in a pool of 100's of
-workers -- shaving your execution time by orders of magnitude. However, to
-leverage azure batch, you'll need to:
+Anytime you have code that can be divided into independent chunks, Azure
+Batch can orchestrate the execution of those tasks a pool of 100's of workers
+nodes (VMs) -- reducing your execution time by orders of magnitude. However,
+to leverage azure batch, you'll need to:
 
 * Create some Azure resources including:
   * An Azure Batch instance
@@ -41,3 +41,9 @@ In order to leverage Azure Batch using SuperBatch, you'll need:
 ```shell
 pip install git+https://github.com/jdthorpe/batch-config.git
 ```
+
+## Getting Started
+
+Follow along in the tutorial, or clone the
+[super-batch-starter](https://github.com/jdthorpe/super-batch-starter) and
+replace the starter code with yours
