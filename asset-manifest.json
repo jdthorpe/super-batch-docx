@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/super-batch/static/css/main.ef317bf7.chunk.css",
-    "main.js": "/super-batch/static/js/main.5452b211.chunk.js",
-    "main.js.map": "/super-batch/static/js/main.5452b211.chunk.js.map",
+    "main.js": "/super-batch/static/js/main.3853b2de.chunk.js",
+    "main.js.map": "/super-batch/static/js/main.3853b2de.chunk.js.map",
     "runtime-main.js": "/super-batch/static/js/runtime-main.40ade205.js",
     "runtime-main.js.map": "/super-batch/static/js/runtime-main.40ade205.js.map",
     "static/css/2.66a375a2.chunk.css": "/super-batch/static/css/2.66a375a2.chunk.css",
     "static/js/2.2fa4f0e5.chunk.js": "/super-batch/static/js/2.2fa4f0e5.chunk.js",
     "static/js/2.2fa4f0e5.chunk.js.map": "/super-batch/static/js/2.2fa4f0e5.chunk.js.map",
     "index.html": "/super-batch/index.html",
-    "precache-manifest.c5f4b3056ae7ac5b7e3493d7920471b1.js": "/super-batch/precache-manifest.c5f4b3056ae7ac5b7e3493d7920471b1.js",
+    "precache-manifest.a8d9a04fb0415e730555b6782f38a4b1.js": "/super-batch/precache-manifest.a8d9a04fb0415e730555b6782f38a4b1.js",
     "service-worker.js": "/super-batch/service-worker.js",
     "static/css/2.66a375a2.chunk.css.map": "/super-batch/static/css/2.66a375a2.chunk.css.map",
     "static/css/main.ef317bf7.chunk.css.map": "/super-batch/static/css/main.ef317bf7.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.66a375a2.chunk.css",
     "static/js/2.2fa4f0e5.chunk.js",
     "static/css/main.ef317bf7.chunk.css",
-    "static/js/main.5452b211.chunk.js"
+    "static/js/main.3853b2de.chunk.js"
   ]
 }
