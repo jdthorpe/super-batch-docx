@@ -4,21 +4,23 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import clsx from "clsx"
-import { IPageName } from "./App"
+import { IRouteName } from "./App"
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        root: {
-            width: '100%',
-            maxWidth: 360,
-            backgroundColor: theme.palette.background.paper,
-        },
         drawer: {
-            backgroundColor:"#49494d",
-            color:"#e6e6eb",
-            paddingLeft:".8rem",
-            paddingTop:".8rem",
-            height:"100%"
+            backgroundColor: "#49494d",
+            color: "#e6e6eb",
+            paddingLeft: ".8rem",
+            paddingTop: ".8rem",
+            height: "100%",
+            "& a, & a:visited, & a:hover, & a:active, & a:focus": {
+                "color": "inherit",
+                "text-decoration":"none" ,
+                "outline": "none" ,
+             }
+
         },
         item: {
             fontSize: 13,
@@ -38,26 +40,33 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: 0,
             margin: 0,
             listStyle: 'none',
+            textDecoration: "none" ,
         },
         nested: {
             paddingLeft: theme.spacing(4),
         },
+        link: {
+            textDecoration: "none",
+        }
     }),
 );
 
-const CODE_PAGES: [string, IPageName][] = [
-    ["Create Azure Resources", "AZURE-RESOURCES",],
-    ["Refactoring your Code", "CODE-SPLITTING",],
-    ["The Task Worker", "WORKER",],
-    ["Build the Docker Image", "DOCKER",],
-    ["The Controller", "CONTROLLER"],
-    ["Clean Up", "CLEANUP"],
+const CODE_PAGES: [string, IRouteName][] = [
+    ["Create Azure Resources", "/create-resources",],
+    ["Refactoring your Code", "/refactoring",],
+    ["The Task Worker", "/worker",],
+    ["Build the Docker Image", "/building-with-docker",],
+    ["The Controller", "/controller"],
+    ["Clean Up", "/cleanup"],
 ]
 
+//   "/api"
+//   "/"
+//   "/worker"
+//   "/faq";
 
-export default function NestedList(props: {
-    setView: (x: IPageName) => void
-}) {
+
+export default function NestedList() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
@@ -72,29 +81,36 @@ export default function NestedList(props: {
                 aria-labelledby="nested-list-subheader"
                 className={classes.ul}
             >
-                <li className={`active ${classes.item}`} onClick={() => props.setView("OVERVIEW")}>
-                    <ListItemText primary="Overview" />
-                </li>
+                <Link to="/" className={classes.link} style={{ textDecoration: 'none', color: "inherit"}}>
+                    <li className={`active ${classes.item}`} >
+                        <ListItemText primary="Overview" />
+                    </li>
+                </Link>
                 <li className={classes.item} onClick={handleClick}>
                     <ListItemText primary="Tutorial" />
                 </li>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <ul className={classes.ul}>
                         {CODE_PAGES.map(([name, key]) => (
-
-                            <li className={clsx(classes.item, classes.itemSecondary)} key={key} onClick={() => props.setView(key)}>
-                                {name}
-                            </li>
+                            <Link to={key}>
+                                <li className={clsx(classes.item, classes.itemSecondary)} key={key} >
+                                    {name}
+                                </li>
+                            </Link>
 
                         ))}
                     </ul>
                 </Collapse>
-                <li className={classes.item} onClick={() => props.setView("FAQ")}>
-                    <ListItemText primary="FAQ" />
-                </li>
-                <li className={classes.item} onClick={() => props.setView("API")}>
-                    <ListItemText primary="API" />
-                </li>
+                <Link to="/faq">
+                    <li className={classes.item} >
+                        <ListItemText primary="FAQ" />
+                    </li>
+                </Link>
+                <Link to="/api">
+                    <li className={classes.item} >
+                        <ListItemText primary="API" />
+                    </li>
+                </Link>
             </Typography>
         </div>
     );

@@ -3,7 +3,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import NavList from "./nav-list";
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
-import { IPageName } from "./App"
 
 export const drawerWidth = 220;
 
@@ -16,7 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         drawer:{
-            height:"100vh"
+            display: "flex",
+            flexDirection: "column",
+            height: "100%"
         },
         toolbar: theme.mixins.toolbar,
         drawerPaper: {
@@ -32,7 +33,6 @@ interface ResponsiveDrawerProps {
      * You won't need it on your project.
      */
     container?: Element;
-    setView: (x: IPageName) => void
 
 }
 
@@ -49,7 +49,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
     const drawer = (
         <div className={classes.drawer}>
             <div className={classes.toolbar} />
-            <NavList setView={props.setView} />
+            <NavList/>
         </div >
     );
 

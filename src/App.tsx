@@ -27,6 +27,12 @@ import { IconButton } from '@material-ui/core';
 import MenuIcon from "@material-ui/icons/Menu"
 
 import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
+
+import {
   API,
   CleanUp,
   Controller,
@@ -85,91 +91,90 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export type IPageName =
-  | "API"
-  | "AZURE-RESOURCES"
-  | "CODE-SPLITTING"
-  | "CLEANUP"
-  | "CONTROLLER"
-  | "DOCKER"
-  | "OVERVIEW"
-  | "FAQ"
-  | "WORKER";
+export type IRouteName =
+  | "/api"
+  | "/create-resources"
+  | "/cleanup"
+  | "/controller"
+  | "/refactoring"
+  | "/building-with-docker"
+  | "/"
+  | "/worker"
+  | "/faq";
 
-const Page = (props: { page: IPageName }) => {
-  switch (props.page) {
-    case "API": return <API />;
-    case "AZURE-RESOURCES": return <AzureResources />;
-    case "CLEANUP": return <CleanUp />;
-    case "CONTROLLER": return <Controller />;
-    case "CODE-SPLITTING": return <Refactoring />;
-    case "DOCKER": return <DockerBuild />;
-    case "OVERVIEW": return <Overview />;
-    case "WORKER": return <Worker />;
-    case "FAQ": return <FAQ />;
-    default: return (<div>Something went wrong</div>)
-  }
-}
 
 function App() {
   const classes = useStyles();
 
-  const [selectedView, setSelectedView] = useState<IPageName>("OVERVIEW")
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   return (
 
-    <div className={classes.root}>
+    <Router>
+      <div className={classes.root}>
 
-      <Drawer setView={setSelectedView} />
+        <Drawer />
 
-      <div className="App">
-        <CssBaseline />
+        <div className="App">
+          
+          <CssBaseline />
 
-        <ThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}>
 
-          <AppBar position="fixed" className={classes.appBar}>
+            <AppBar position="fixed" className={classes.appBar}>
 
-            <Hidden xsDown implementation="css">
-              <GitHubForkRibbon href="//github.com/microsoft/simplify-docx"
-                target="_blank"
-                position="right"
-                color="black">
-                Fork me on GitHub
+              <Hidden xsDown implementation="css">
+                <GitHubForkRibbon href="//github.com/microsoft/simplify-docx"
+                  target="_blank"
+                  position="right"
+                  color="black">
+                  Fork me on GitHub
               </GitHubForkRibbon>
-            </Hidden>
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                className={classes.menuButton}
-              >
-                <MenuIcon
-                  fontSize="large"
-                />
-              </IconButton>
+              </Hidden>
+              <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  className={classes.menuButton}
+                >
+                  <MenuIcon
+                    fontSize="large"
+                  />
+                </IconButton>
 
-              <Typography variant="h4" noWrap className={classes.logo}>
-                SuperBatch
+                <Typography variant="h4" noWrap className={classes.logo}>
+                  SuperBatch
               </Typography>
-            </Toolbar>
-          </AppBar>
+              </Toolbar>
+            </AppBar>
 
-          <div className={classes.toolbar} />
+            <div className={classes.toolbar} />
 
-          <div className={classes.main}>
-            <Page page={selectedView} />
-          </div>
+            <div className={classes.main}>
 
-        </ThemeProvider >
+              <Switch>
+                <Route exact={true} path="/api"> <API /></Route>
+                <Route exact={true} path="/create-resources"> <AzureResources /></Route>
+                <Route exact={true} path="/cleanup"> <CleanUp /></Route>
+                <Route exact={true} path="/controller"> <Controller /></Route>
+                <Route exact={true} path="/refactoring"> <Refactoring /></Route>
+                <Route exact={true} path="/building-with-docker"> <DockerBuild /></Route>
+                <Route exact={true} path="/"> <Overview /></Route>
+                <Route exact={true} path="/worker"> <Worker /></Route>
+                <Route exact={true} path="/faq"> <FAQ /></Route>
+              </Switch>
+            </div>
 
+          </ThemeProvider >
+
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

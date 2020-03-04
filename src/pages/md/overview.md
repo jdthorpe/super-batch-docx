@@ -26,7 +26,9 @@ leverage azure batch, you'll need to:
 * Download the results of each task
 * Aggregate the task results to and produce your final output
 
-This module aims to make this process as easy as possible
+If this sounds intimidating, this package is here to help you get to your
+python - _or any other code_ - up and running in Azure Batch with as little
+pain as possible.
 
 ## Requirements
 
@@ -34,30 +36,8 @@ In order to leverage Azure Batch using SuperBatch, you'll need:
 
 * The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) installed, in order to interact with the Azure cloud
 * The [Docker CLI](https://docs.docker.com/install/) installed, in order to bundle your code and push it to a registry
-* The SuperBatch package, which can be installed via
+* The SuperBatch package, which can be installed via:
 
-    ```shell
-    pip install git+https://github.com/jdthorpe/batch-config.git
-    ```
-
-## Overview of the Process
-
-Azure batch is responsible for:
-
-1. loading your code into a computing environment
-1. loading the data that your code requires from the cloud into the working directory
-1. executing your code
-1. collecting the data produced by your code.
-
-Therefor, you will need to:
-
-1. Bundle your code
-1. Specify where your code will read in required data and write results
-1. Run your code in Azure Batch
-1. Collect the results
-1. Clean up your azure resources
-
-## _Tips_
-
-* Although this module is written in python, it can be used to coordinate the
-    execution of code in any language / stack
+```shell
+pip install git+https://github.com/jdthorpe/batch-config.git
+```
