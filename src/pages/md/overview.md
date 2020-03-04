@@ -18,12 +18,12 @@ leverage azure batch, you'll need to:
 
 * Create some Azure resources including:
   * An Azure Batch instance
-  * A Storage Account
-  * Optionally, an Azure Container Registry
-* Bundle your code which does the actual work into and store it in the cloud
-* Store input files in the cloud
-* Tell Azure Batch about each of the individual tasks that need to be run
-* Download the results of each task
+  * An Azure Storage Account
+  * An Azure Container Registry (Optional)
+* Bundle your worker code with it's dependencies and store it in the cloud
+* Store input (*Resource*) files in the cloud
+* Define the Individual tasks and upload them to Azure Batch
+* Download the results from each task
 * Aggregate the task results to and produce your final output
 
 If this sounds intimidating, this package is here to help you get to your
