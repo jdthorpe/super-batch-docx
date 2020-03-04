@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingLeft: ".8rem",
             paddingTop: ".8rem",
             height: "100%",
-            "& a, & a:visited, & a:hover, & a:active, & a:focus": {
+            "& a": {
                 "color": "inherit",
                 "text-decoration":"none" ,
                 "outline": "none" ,

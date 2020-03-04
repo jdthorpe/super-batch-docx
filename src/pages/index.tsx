@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
         root: {
             "& p code": {
                 backgroundColor: "#cadceb",
-                padding: "0.2rem",
-                paddingLeft: "0.4rem",
-                paddingRight: "0.4rem",
-                borderRadius: "0.2rem"
+                padding: "0.125rem",
+                paddingLeft: "0.2rem",
+                paddingRight: "0.2rem",
+                borderRadius: "0.125rem"
             }
         }
     }),
