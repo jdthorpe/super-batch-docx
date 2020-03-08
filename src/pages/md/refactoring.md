@@ -4,6 +4,7 @@ The following code is a typical (if not simple) example of code that can be
 split up and run on Azure Batch.
 
 ```python
+#! ./run_locally.py copy show
 import numpy as np
 
 POWER = 3
@@ -32,6 +33,7 @@ before splitting your code is an efficient way to ensure that the next steps
 go smoothly.
 
 ```python
+#! ./run_locally.py copy show
 import numpy as np
 
 # Parameters that apply to every task
@@ -69,10 +71,11 @@ print(sum(task_results))
 
 ## Step 2: Refactoring
 
-In this step the code is split into a function (`task()`) which is responsible for executing a single task:
+In this step the code is split into a function which is responsible for
+executing a single task:
 
 ```python
-# task.py
+#! task.py copy show
 import numpy as np
 
 def task(global_parameters, task_parameters)
@@ -83,14 +86,17 @@ def task(global_parameters, task_parameters)
 
     # do work
     np.random.seed(seed)
-    return sum(np.power(np.random.uniform(size=size), power))
+    task_result = sum(np.power(np.random.uniform(size=size), power))
+
+    # return the results
+    return task_result
 ```
 
-and a stub for a script (`controller.py`) which will be responsible for
+and a stub for a script which will be responsible for
 coordinating the work:
 
 ```python
-# controller.py
+#! controller.py copy show
 import super_batch
 
 # <<< Configure Azure Batch here >>>
@@ -119,4 +125,5 @@ print(sum(task_results))
 
 ## Up next
 
-In the next step we'll fill in the dots and finish coordinating the work using the `super_batch` package
+In the next step we'll fill in the dots and finish coordinating the work
+using the `super_batch` package

@@ -1,7 +1,7 @@
 import React from "react"
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { CreateResources, GatherCredentials, UsingACR } from "../code-blocks"
-import { StyledMarkdown } from "../index"
+import StyledMarkdown from "../styled-markdown"
 import raw from "raw.macro"
 // import ReactMarkdown from 'react-markdown'
 const tip = raw("./tip.md")

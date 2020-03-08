@@ -7,12 +7,14 @@ pools, and the container registry) can be deleted with the following command:
 ## PowerShell and Bash
 
 ```powershell
+#! copy
 az group delete -n $name
 ```
 
 ## CMD
 
-```batch
+```shell
+#! copy
 az group delete -n %name%
 ```
 

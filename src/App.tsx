@@ -126,7 +126,7 @@ function App() {
           <AppBar position="fixed" className={classes.appBar}>
 
             <Hidden xsDown implementation="css">
-              <GitHubForkRibbon href="//github.com/microsoft/simplify-docx"
+              <GitHubForkRibbon href="//github.com/jdthorpe/batch-config"
                 target="_blank"
                 position="right"
                 color="black">

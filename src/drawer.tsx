@@ -66,6 +66,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
                     ModalProps={{
                         keepMounted: true, // Better open performance on mobile.
                     }}
+                    onClick={props.toggleOpen}
                 >
                     {drawer}
                 </Drawer>

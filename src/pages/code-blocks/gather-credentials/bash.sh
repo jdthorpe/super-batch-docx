@@ -1,4 +1,3 @@
-```bash
 # Query the required parameters
 export BATCH_ACCOUNT_NAME=$name
 export BATCH_ACCOUNT_KEY=$(az batch account keys list -n $name -g $name --query primary)
@@ -11,4 +10,3 @@ BATCH_ACCOUNT_KEY=$(sed -e 's/^"//' -e 's/"$//' <<<"$BATCH_ACCOUNT_KEY")
 BATCH_ACCOUNT_ENDPOINT=$(sed -e 's/^"//' -e 's/"$//' <<<"$BATCH_ACCOUNT_ENDPOINT")
 STORAGE_ACCOUNT_KEY=$(sed -e 's/^"//' -e 's/"$//' <<<"$STORAGE_ACCOUNT_KEY")
 STORAGE_ACCOUNT_CONNECTION_STRING=$(sed -e 's/^"//' -e 's/"$//' <<<"$STORAGE_ACCOUNT_CONNECTION_STRING")
-```

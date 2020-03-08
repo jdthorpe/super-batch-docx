@@ -11,17 +11,17 @@ best practices too.
 
 ## Azure Batch
 
-Anytime you have code that can be divided into independent chunks, Azure
-Batch can orchestrate the execution of those tasks a pool of 100's of workers
-nodes (VMs) -- reducing your execution time by orders of magnitude. However,
-to leverage azure batch, you'll need to:
+If you have a long running script that can be divided into independent tasks,
+Azure Batch can orchestrate the execution of those tasks a pool of 100's of
+worker nodes (VMs) -- reducing your execution time by orders of magnitude.
+However, to leverage azure batch, you'll need to:
 
 * Create some Azure resources including:
-  * An Azure Batch instance
+  * An Azure Batch Account with at least one node pool
   * An Azure Storage Account
   * An Azure Container Registry (Optional)
 * Bundle your worker code with it's dependencies and store it in the cloud
-* Store input (*Resource*) files in the cloud
+* Store your input (*Resource*) files in the cloud
 * Define the Individual tasks and upload them to Azure Batch
 * Download the results from each task
 * Aggregate the task results to and produce your final output
@@ -34,8 +34,8 @@ pain as possible.
 
 In order to leverage Azure Batch using SuperBatch, you'll need:
 
-* The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) installed, in order to interact with the Azure cloud
-* The [Docker CLI](https://docs.docker.com/install/) installed, in order to bundle your code and push it to a registry
+* The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) installed in order to interact with the Azure cloud
+* The [Docker CLI](https://docs.docker.com/install/) installed in order to bundle your code and push it to a registry.
 * The SuperBatch package, which can be installed via:
 
 ```shell

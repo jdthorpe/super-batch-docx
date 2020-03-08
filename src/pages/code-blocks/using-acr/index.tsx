@@ -1,9 +1,9 @@
 import React from "react"
-import CodeTabs from "../code-block"
+import CodeTabs from "../tab-code-block"
 import raw from "raw.macro"
-const bash = raw("./bash.md")
-const powershell = raw("./powershell.md")
-const cmd = raw("./cmd.md")
+const cmd = raw("./cmd.bat")
+const bash = raw("./bash.sh")
+const powershell = raw("./powershell.ps1")
 
 interface IProps {
     value: number,
@@ -13,9 +13,9 @@ interface IProps {
 export function UsingACR(props: IProps) {
 
     return <CodeTabs blocks={[
-        ["bash", bash],
-        ["Powershell", powershell],
-        ["CMD", cmd]
+        ["bash","shell", bash],
+        ["Powershell","powershell",  powershell],
+        ["CMD","shell",  cmd]
     ]} { ...props}/>
 }
 

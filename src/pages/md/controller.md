@@ -19,7 +19,7 @@ need to be updated. Conveniently, these sections can be filled in by copying
 the code from the `#controller.py` code snippet on the `splitting code` page.
 
 ```python
-# ./controller.py
+#! ./controller.py copy
 import os
 from os.path import join, expanduser
 import datetime

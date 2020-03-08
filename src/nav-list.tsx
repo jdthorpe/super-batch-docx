@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -17,9 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
             height: "100%",
             "& a": {
                 "color": "inherit",
-                "text-decoration":"none" ,
-                "outline": "none" ,
-             }
+                "text-decoration": "none",
+                "outline": "none",
+            }
 
         },
         item: {
@@ -29,9 +30,14 @@ const useStyles = makeStyles((theme: Theme) =>
             boxSizing: 'content-box',
             '&:hover': {
                 borderLeft: `4px solid ${
-                    theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
+                    theme.palette.type === 'light' ? theme.palette.grey[100] : theme.palette.grey[500]
                     }`,
             },
+        },
+        active: {
+            borderLeft: `4px solid ${
+                theme.palette.type === 'light' ? theme.palette.grey[500] : theme.palette.grey[900]
+                }`,
         },
         itemSecondary: {
             paddingLeft: "1.6rem"
@@ -40,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: 0,
             margin: 0,
             listStyle: 'none',
-            textDecoration: "none" ,
+            textDecoration: "none",
         },
         nested: {
             paddingLeft: theme.spacing(4),
@@ -66,9 +72,12 @@ const CODE_PAGES: [string, IRouteName][] = [
 //   "/faq";
 
 
-export default function NestedList() {
+const NestedList: React.SFC<RouteComponentProps> = (props) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
+
+    console.log("nav-props:")
+    console.dir(props)
 
     const handleClick = () => {
         setOpen(!open);
@@ -81,8 +90,8 @@ export default function NestedList() {
                 aria-labelledby="nested-list-subheader"
                 className={classes.ul}
             >
-                <Link to="/" className={classes.link} style={{ textDecoration: 'none', color: "inherit"}}>
-                    <li className={`active ${classes.item}`} >
+                <Link to="/" className={classes.link} style={{ textDecoration: 'none', color: "inherit" }}>
+                    <li className={clsx(classes.item, props.location.pathname === "/" ? classes.active : null)} >
                         <ListItemText primary="Overview" />
                     </li>
                 </Link>
@@ -93,7 +102,10 @@ export default function NestedList() {
                     <ul className={classes.ul}>
                         {CODE_PAGES.map(([name, key]) => (
                             <Link to={key} key={key}>
-                                <li className={clsx(classes.item, classes.itemSecondary)} key={key} >
+                                <li className={clsx(classes.item,
+                                    classes.itemSecondary,
+                                    props.location.pathname === key ? classes.active : null)}
+                                    key={key} >
                                     {name}
                                 </li>
                             </Link>
@@ -102,12 +114,12 @@ export default function NestedList() {
                     </ul>
                 </Collapse>
                 <Link to="/faq">
-                    <li className={classes.item} >
+                    <li className={clsx(classes.item, props.location.pathname === "/faq" ? classes.active : null)} >
                         <ListItemText primary="FAQ" />
                     </li>
                 </Link>
                 <Link to="/api">
-                    <li className={classes.item} >
+                    <li className={clsx(classes.item, props.location.pathname === "/api" ? classes.active : null)} >
                         <ListItemText primary="API" />
                     </li>
                 </Link>
@@ -115,3 +127,5 @@ export default function NestedList() {
         </div>
     );
 }
+
+export default withRouter(NestedList)

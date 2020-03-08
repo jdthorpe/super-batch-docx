@@ -1,4 +1,3 @@
-```batch
 REM Query the required parameters
 set BATCH_ACCOUNT_NAME=%name%
 for /f %i in ('az batch account keys list -n %name% -g %name% --query primary') do @set BATCH_ACCOUNT_KEY=%i
@@ -11,4 +10,3 @@ set BATCH_ACCOUNT_KEY=%BATCH_ACCOUNT_KEY:"=%
 set BATCH_ACCOUNT_ENDPOINT=%BATCH_ACCOUNT_ENDPOINT:"=%
 set STORAGE_ACCOUNT_KEY=%STORAGE_ACCOUNT_KEY:"=%
 set STORAGE_ACCOUNT_CONNECTION_STRING=%STORAGE_ACCOUNT_CONNECTION_STRING:"=%
-```

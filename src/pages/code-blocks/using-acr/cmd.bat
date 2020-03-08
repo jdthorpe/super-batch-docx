@@ -1,4 +1,3 @@
-```batch
 set AZURE_CR_NAME=MyOwnPrivateRegistry
 
 REM Create the resource group and enable querying the password from the CLI
@@ -12,4 +11,3 @@ for /f %i in ('az acr credential show -n %AZURE_CR_NAME% --query passwords[0].va
 REGISTRY_SERVER=$(sed -e 's/^"//' -e 's/"$//' <<<"$REGISTRY_SERVER")
 REGISTRY_USERNAME=$(sed -e 's/^"//' -e 's/"$//' <<<"$REGISTRY_USERNAME")
 REGISTRY_PASSWORD=$(sed -e 's/^"//' -e 's/"$//' <<<"$REGISTRY_PASSWORD")
-```

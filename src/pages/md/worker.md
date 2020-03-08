@@ -12,7 +12,7 @@ resource and output files which is shared between the controller and
 worker modules.
 
 ```python
-# ./constants.py
+#! ./constants.py copy show
 # The global parameters file
 GLOBAL_CONFIG_FILE = "config.pickle"
 
@@ -43,7 +43,7 @@ worker - which is responsible for reading in the resource files, executing
 the task, and writing the output to disk - is entirely boilerplate code:
 
 ```python
-# ./worker.py
+#! ./worker.py copy show
 import joblib
 from constants import GLOBAL_CONFIG_FILE, TASK_INPUTS_FILE, TASK_OUTPUTS_FILE
 from task import task

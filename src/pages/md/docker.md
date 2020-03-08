@@ -15,7 +15,7 @@ pip freeze >> requirements.txt
 Next create a docker file in the root of your project with the following:
 
 ```dockerfile
-# ./Dockerfile
+#! ./Dockerfile copy show
 FROM python:3.7
 
 # Install dependencies
@@ -30,6 +30,7 @@ COPY task.py worker.py constants.py .
 Next log into the registry
 
 ```powershell
+#! copy show
 # *Note that the acr login token is typically only valid for one hour*
 $AZURE_CR_NAME = "myownprivateregistry"
 az acr login --name $AZURE_CR_NAME
@@ -38,6 +39,7 @@ az acr login --name $AZURE_CR_NAME
 And push your code to the registry
 
 ```powershell
+#! copy show
 # define the image name
 $env:REGISTRY_SERVER = (az acr show -n $AZURE_CR_NAME --query loginServer) -replace '"',''
 $IMAGE_NAME = "${env:REGISTRY_SERVER}/batch-worker:v1"

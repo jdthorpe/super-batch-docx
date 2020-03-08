@@ -133,24 +133,39 @@ Provides an interface for preparing, running, and pulling down data from an Azur
 
 **Arguments**:
 
-- `BATCH_DIRECTORY` _string_ - Local directory in which input and output files should be placed
-- `BATCH_ACCOUNT_NAME` _string_ - Batch account name. Taken from the environment when not provided
-- `BATCH_ACCOUNT_KEY` _string_ - Batch account key. Taken from the environment when not provided
-- `BATCH_ACCOUNT_ENDPOINT` _string_ - Batch account endpoint. Taken from the environment when not provided
+- `BATCH_DIRECTORY` _string_ - Path to a directory on the local machine in which input (resource) and output files should be placed
 - `JOB_ID` _string_ - Name for the Batch Job
-- `STORAGE_ACCOUNT_NAME` _string_ - Storage Account name
-- `STORAGE_ACCOUNT_KEY` _string_ - Storage account key. Taken from the environment when not provided
-- `STORAGE_ACCOUNT_CONNECTION_STRING` _string_ - Storage account access connection string. Taken from the environment when not provided
-- `STORAGE_ACCESS_DURATION_HRS` _int_ - Time in hours that the generated the storage access token will be valid for
-- `BLOB_CONTAINER_NAME` _string_ - Name for the blob storage container
-- `POOL_ID` _string_ - Pool Id
+
+#### Batch Account Options
+
+- `BATCH_ACCOUNT_NAME` _string_ - Batch account name. **Taken from the environment when not provided**
+- `BATCH_ACCOUNT_KEY` _string_ - Batch account key. **Taken from the environment when not provided**
+- `BATCH_ACCOUNT_ENDPOINT` _string_ - Batch account endpoint. **Taken from the environment when not provided**
+
+#### Blob Storage Options
+
+- `BLOB_CONTAINER_NAME` _string_ - Name of the blob storage container for storing input (resource) and output files
+- `STORAGE_ACCOUNT_NAME` _string_ - Name of the Storage Account for storing input (resource) and output files
+- `STORAGE_ACCOUNT_KEY` _string_ - Storage account key. **Taken from the environment when not provided**
+- `STORAGE_ACCOUNT_CONNECTION_STRING` _string_ - Storage account access connection string. **Taken from the environment when not provided**
+- `STORAGE_ACCESS_DURATION_HRS` _int_ - Time in hours that the generated the storage access token will be valid for. Default: 24
+
+#### Node Pool Options
+
+- `POOL_ID` _string_ - Name of the Azure Batch Node Pool to be used
 - `POOL_NODE_COUNT` _int_ - Count for normal priority nodes in the batch pool. Only used when creating a pool.  **Ignored if the pool already exists**
 - `POOL_LOW_PRIORITY_NODE_COUNT` _int_ - Count for low priority nodes in the batch pool.    **Ignored if the pool already exists**
-- `POOL_VM_SIZE` _string_ - VM name (See the FAQ for details)
+- `POOL_VM_SIZE` _string_ - VM name (See the FAQ for details) **Ignored if the pool already exists**
+
+#### Docker Registry Options
+
 - `DOCKER_IMAGE` _string_ - name of the docker image
-- `REGISTRY_SERVER` _string, optional_ - Used when the docker image is hosted on a private repository. Taken from the environment when not provided
-- `REGISTRY_USERNAME` _string, optional_ - Used when the docker image is hosted on a private repository. Taken from the environment when not provided
-- `REGISTRY_PASSWORD` _string, optional_ - Used when the docker image is hosted on a private repository. Taken from the environment when not provided
+- `REGISTRY_SERVER` _string, optional_ - Used when the docker image is hosted on a private repository. **Taken from the environment when not provided**
+- `REGISTRY_USERNAME` _string, optional_ - Used when the docker image is hosted on a private repository. **Taken from the environment when not provided**
+- `REGISTRY_PASSWORD` _string, optional_ - Used when the docker image is hosted on a private repository. **Taken from the environment when not provided**
+
+#### Automatic Cleanup Options
+
 - `DELETE_POOL_WHEN_DONE` _boolean_ - Should the batch pool be deleted when the job has been completed? Default `False`
 - `DELETE_JOB_WHEN_DONE` _boolean_ - Should the batch job be deleted when the job has been completed? Default `False`
 - `DELETE_CONTAINER_WHEN_DONE` _boolean_ - should the blob storage container be deleted when the job has been completed? Default `False`

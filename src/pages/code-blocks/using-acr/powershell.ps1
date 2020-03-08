@@ -1,4 +1,3 @@
-```powershell
 $AZURE_CR_NAME = "MyOwnPrivateRegistry"
 
 # Create the resource group and enable querying the password from the CLI
@@ -10,6 +9,5 @@ $env:REGISTRY_SERVER = (az acr show -n $AZURE_CR_NAME --query loginServer) -repl
 $env:REGISTRY_USERNAME = (az acr credential show -n $AZURE_CR_NAME --query username) -replace '"',''
 $env:REGISTRY_PASSWORD = (az acr credential show -n $AZURE_CR_NAME --query passwords[0].value) -replace '"',''
 
-
+# The name of the worker image (Note the version number!)
 $env:image_name = "${env:REGISTRY_SERVER}/batch-worker:v1"
-```
