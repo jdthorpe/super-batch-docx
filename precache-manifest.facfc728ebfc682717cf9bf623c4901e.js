@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5258d0e1dd215a8e61276f908134a5c3",
+    "revision": "782fee5236fc1bc9bf3e5e373bf272b9",
     "url": "/super-batch-docs/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/super-batch-docs/static/css/2.4be11a11.chunk.css"
   },
   {
-    "revision": "6211fa698699806ef2ce",
+    "revision": "4a3624626586511620aa",
     "url": "/super-batch-docs/static/css/main.ef317bf7.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/super-batch-docs/static/js/2.40fecd0e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6211fa698699806ef2ce",
-    "url": "/super-batch-docs/static/js/main.33880d26.chunk.js"
+    "revision": "4a3624626586511620aa",
+    "url": "/super-batch-docs/static/js/main.535eb0e8.chunk.js"
   },
   {
     "revision": "cd6d249201f05630656c",
