@@ -10,7 +10,7 @@ import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 
-import Dialog from '@material-ui/core/Dialog';
+import Dialog from '@material-ui/core/Modal';
 
 import 'codemirror/mode/shell/shell'
 import 'codemirror/mode/python/python'
@@ -28,16 +28,21 @@ const editStyles = makeStyles((theme: Theme) =>
                 padding: "0.125rem",
                 paddingLeft: "0.2rem",
                 paddingRight: "0.2rem",
-                borderRadius: "0.3rem"
+                borderBottomRightRadius: "0.3rem",
+                borderBottomLeftRadius: "0.3rem"
             }
         },
-        inner:{
-            height:"calc(100% - 64px)",
-            position:"relative",
+        inner: {
+            height: "calc(100% - 64px)",
+            position: "relative",
         },
         dialog: {
-            minWidth: "80vw",
             backgroundColor: "#fff",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            outline: 0,
             "& .CodeMirror": {
                 height: "auto",
                 padding: "0.125rem",
@@ -45,12 +50,17 @@ const editStyles = makeStyles((theme: Theme) =>
                 paddingRight: "0.2rem",
             }
         },
+        dialogPaper: {
+            outline: 0,
+            margin: "3rem",
+            maxWidth: "calc(100% - 6rem)",
+        },
         dialogCM: {
             overflow: "auto",
-            maxHeight:"calc(100vh - 96px)"
         },
         header: {
             display: "flex",
+            backgroundColor:"#fff",
             justifyContent: "space-between",
             alignItems: "center",
             paddingRight: "1rem",
@@ -84,9 +94,7 @@ const CodeBlock: React.FC<ICodeProps> = (props) => {
     const [justCopied, setJustCopied] = useState<boolean>(false);
     const classes = editStyles()
 
-    // dialog: 
     const [open, setOpen] = useState<boolean>(false);
-
     const handleClose = () => { setOpen(false) }
 
     if (!props.value.startsWith("#!")) {
@@ -173,7 +181,7 @@ const CodeBlock: React.FC<ICodeProps> = (props) => {
                     open={open}
                 >
 
-                    <div className={classes.inner}>
+                    <div className={classes.dialogPaper}>
                         <div className={classes.header}>
                             <div className={classes.filename}>
                                 {filename ? <p>{filename}</p> : null}

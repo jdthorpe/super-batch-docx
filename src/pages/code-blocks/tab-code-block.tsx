@@ -1,11 +1,13 @@
 import React, { FC, useState } from 'react';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Controlled as CodeMirror } from 'react-codemirror2';
+import Dialog from '@material-ui/core/Modal';
 import copy from "clipboard-copy"
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import EditIcon from '@material-ui/icons/Edit';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
+import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import AppBar from '@material-ui/core/AppBar';
@@ -50,14 +52,16 @@ const useStyles = makeStyles(theme => ({
             padding: "0.125rem",
             paddingLeft: "0.2rem",
             paddingRight: "0.2rem",
-            borderRadius: "0.5rem"
+            borderBottomRightRadius: "0.3rem",
+            borderBottomLeftRadius: "0.3rem"
         }
     },
     tabs: {
         justifyContent: "space-between"
     },
     active: {
-        color: "#4785ff",
+        color: "#44a2ff",
+        
     },
     tab: {
         minWidth: "50px"
@@ -85,6 +89,30 @@ const useStyles = makeStyles(theme => ({
     buttonMargin: {
         margin: theme.spacing(0.5),
     },
+
+    dialog: {
+        backgroundColor: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        outline: 0,
+        "& .CodeMirror": {
+            height: "auto",
+            padding: "0.125rem",
+            paddingLeft: "0.2rem",
+            paddingRight: "0.2rem",
+        }
+    },
+    dialogPaper: {
+        outline: 0,
+        margin: "3rem",
+        maxWidth: "calc(100% - 6rem)"
+    },
+    dialogCM: {
+        overflow: "auto",
+        maxHeight: "calc(100vh - 96px)"
+    },
 }));
 
 
@@ -101,11 +129,7 @@ const theme = createMuiTheme({
             main: '#ddd',
         },
         secondary: {
-            main: '#ff63e5',
-        },
-        text: {
-            primary: "#ff63e5",
-            secondary: "#ff63e5",
+            main: '#44a2ff',
         },
 
         contrastThreshold: 3,
@@ -123,9 +147,11 @@ export default function CodeTabs(props: IProps) {
     const classes = useStyles();
     const [justCopied, setJustCopied] = useState<boolean>(false);
     const [edit, setEdit] = useState<boolean>(false);
-    const [show, setShow] = useState<boolean>(false);
     const [code, setCode] = useState<string[]>(props.blocks.map(x => x[2]))
     const [activeTab, setActiveTab] = useState<number>(0)
+
+    const [open, setOpen] = useState<boolean>(false);
+    const handleClose = () => { setOpen(false) }
 
     const handleCodeChange = (i: number, val: string) => {
         const newCode = [...code];
@@ -178,7 +204,7 @@ export default function CodeTabs(props: IProps) {
                         aria-label="fullscreen"
                         className={classes.buttonMargin}
                         size="small"
-                        onClick={() => setShow(!show)}>
+                        onClick={() => setOpen(!open)}>
                         <FullscreenIcon fontSize="inherit" />
                     </IconButton>
 
@@ -223,6 +249,88 @@ export default function CodeTabs(props: IProps) {
                     />
                 </TabPanel>
             ))}
+
+            <Dialog
+                className={clsx(classes.dialog, classes.root)}
+                onClose={handleClose}
+                aria-labelledby="simple-dialog-title"
+                open={open}
+            >
+
+                <div className={classes.dialogPaper}>
+                    <ThemeProvider theme={theme}>
+                        <AppBar position="static" className={classes.appbar}>
+
+                            <Tabs value={props.value}
+                                style={{ width: "calc(100% - 44px)" }}
+                                onChange={handleChange}
+                                aria-label="simple tabs example">
+
+                                {props.blocks.map(([Label,], index) => (
+                                    <Tab
+                                        label={Label}
+                                        color={"secondary"}
+                                        {...a11yProps(index)}
+                                        className={classes.tab}
+                                        key={index} />
+                                ))}
+                            </Tabs>
+                            <IconButton
+                                aria-label="fullscreen"
+                                className={classes.buttonMargin}
+                                size="small"
+                                onClick={() => setOpen(!open)}>
+                                <FullscreenExitIcon fontSize="inherit" />
+                            </IconButton>
+
+                            <IconButton
+                                aria-label="edit"
+                                className={clsx(classes.buttonMargin, edit ? classes.active : null)}
+                                size="small"
+                                onClick={() => setEdit(!edit)}>
+                                <EditIcon fontSize="inherit" />
+                            </IconButton>
+
+                            <IconButton
+                                aria-label="edit"
+                                className={classes.buttonMargin}
+                                size="small"
+                                onClick={handleReset}>
+                                <RefreshIcon fontSize="inherit" />
+                            </IconButton>
+
+                            <IconButton
+                                aria-label="edit"
+                                className={classes.buttonMargin}
+                                size="small"
+                                onClick={handleCopy}>
+
+                                {justCopied ?
+                                    <CheckCircleOutlineIcon fontSize="small" />
+                                    : <FileCopyIcon fontSize="small" />}
+
+                            </IconButton>
+                        </AppBar>
+
+                        <div className={classes.dialogCM}>
+
+                            {props.blocks.map(([, language,], index) => (
+                                <TabPanel value={props.value} index={index} key={index}>
+                                    <CodeMirror
+                                        options={{
+                                            mode: language,
+                                            theme: "monokai"
+                                        }}
+                                        onBeforeChange={(e, d, v) => { if (edit) { handleCodeChange(index, v) } }}
+                                        value={code[index]}
+                                    />
+                                </TabPanel>
+                            ))}
+
+                        </div>
+                    </ThemeProvider>
+                </div>
+            </Dialog>
         </Box>
     );
 }

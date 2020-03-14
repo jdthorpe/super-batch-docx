@@ -121,8 +121,8 @@ batch_client.run()
 # ------------------------------
 
 task_results = []
-for task in batch_client.tasks:
-    task_results.append(joblib.load(task.something))
+for filename in batch_client.output_files:
+    task_results.append(joblib.load(filename))
 
 # <<< YOUR CODE GOES BELOW >>>
 print(sum(task_results))
