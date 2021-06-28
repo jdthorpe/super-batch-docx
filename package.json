@@ -19,7 +19,7 @@
         "clsx": "^1.1.0",
         "codemirror": "^5.52.0",
         "github-markdown-css": "^4.0.0",
-        "prismjs": "^1.19.0",
+        "prismjs": "^1.24.0",
         "raw.macro": "^0.3.0",
         "react": "^16.13.0",
         "react-codemirror2": "^6.0.0",
