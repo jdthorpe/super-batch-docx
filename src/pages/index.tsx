@@ -15,6 +15,6 @@ export const Worker = build(raw("./md/worker.md"));
 function build(source: string): React.FC {
     return () => {
         useEffect(() => { return Prism.highlightAll(); }, []);
-        return ( <StyledMarkdown source={source} escapeHtml={false} />)
+        return (<StyledMarkdown source={source} escapeHtml={false} />)
     }
 }

@@ -60,7 +60,7 @@ const editStyles = makeStyles((theme: Theme) =>
         },
         header: {
             display: "flex",
-            backgroundColor:"#fff",
+            backgroundColor: "#fff",
             justifyContent: "space-between",
             alignItems: "center",
             paddingRight: "1rem",
@@ -84,11 +84,11 @@ const editStyles = makeStyles((theme: Theme) =>
 
 const ButtonNames = ["edit", "show", "copy",]
 
-interface ICodeProps { language: string, value: string }
+interface ICodeProps { language: string, value?: string }
 
 const CodeBlock: React.FC<ICodeProps> = (props) => {
 
-    const lines: string[] = props.value.split("\n")
+    const lines: string[] = props.value ? props.value.split("\n") : [""]
     const [value, setValue] = useState<string>(lines.slice(1).join("\n"));
     const [edit, setEdit] = useState<boolean>(false);
     const [justCopied, setJustCopied] = useState<boolean>(false);
@@ -97,14 +97,14 @@ const CodeBlock: React.FC<ICodeProps> = (props) => {
     const [open, setOpen] = useState<boolean>(false);
     const handleClose = () => { setOpen(false) }
 
-    if (!props.value.startsWith("#!")) {
+    if (!props.value?.startsWith("#!")) {
         return (<CodeMirror
             options={{
                 mode: props.language === "python" ? props.language : "shell",
                 theme: "monokai"
             }}
             onBeforeChange={() => { /*pass*/ }}
-            value={props.value} />)
+            value={props.value || ""} />)
     }
     const commands: string[] = lines[0].split(/\s+/)
     const buttons: string[] = commands.filter(x => ButtonNames.includes(x))
@@ -118,7 +118,7 @@ const CodeBlock: React.FC<ICodeProps> = (props) => {
                 theme: "monokai"
             }}
             onBeforeChange={() => { /*pass*/ }}
-            value={props.value} />)
+            value={props.value || ""} />)
     }
 
     const handleCopy = () => {

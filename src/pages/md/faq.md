@@ -20,9 +20,10 @@ batch_client = super_batch.client(
 batch_client.load_results()
 ```
 
-where `"<<jobid>>"` is replaced with the job id used when creating the job, which can be queried with 
+where `"<<jobid>>"` is replaced with the job id used when creating the job, which can be queried with
 
 ```shell
+hello
 ```
 
 and then reconnect and download the results using the above answer.

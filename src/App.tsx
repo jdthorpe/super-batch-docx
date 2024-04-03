@@ -148,9 +148,15 @@ function App() {
                   />
                 </IconButton>
               </Hidden>
-              <Typography variant="h4" noWrap className={classes.logo}>
-                SuperBatch
-              </Typography>
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <Typography variant="h6" noWrap className={classes.logo}>
+                  Azure Batch Config
+                </Typography>
+                <Typography noWrap className={classes.logo}>
+                  Convnience Wrappers and Best Practices for Azure Batch
+                </Typography>
+              </div>
             </Toolbar>
           </AppBar>
 
@@ -174,7 +180,7 @@ function App() {
         </ThemeProvider >
 
       </div>
-    </Router>
+    </Router >
   );
 }
 
